@@ -2,7 +2,6 @@ package br.com.netbr.hr_autoritativa.controller;
 
 import br.com.netbr.hr_autoritativa.model.Status;
 import br.com.netbr.hr_autoritativa.model.UsuarioDTO;
-import br.com.netbr.hr_autoritativa.service.FuncaoService;
 import br.com.netbr.hr_autoritativa.service.UsuarioService;
 import br.com.netbr.hr_autoritativa.util.WebUtils;
 import jakarta.validation.Valid;
@@ -22,18 +21,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
-    private final FuncaoService funcaoService;
 
-    public UsuarioController(final UsuarioService usuarioService,
-            final FuncaoService funcaoService) {
-        this.usuarioService = usuarioService;
-        this.funcaoService = funcaoService;
+
+    public UsuarioController(final UsuarioService usuarioService)
+             {this.usuarioService = usuarioService;
+
     }
 
     @ModelAttribute
     public void prepareContext(final Model model) {
         model.addAttribute("statusValues", Status.values());
-        model.addAttribute("funcoesValues", funcaoService.getFuncaoValues());
+
     }
 
     @GetMapping
