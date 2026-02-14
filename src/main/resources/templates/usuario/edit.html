@@ -22,7 +22,6 @@
                 <div th:replace="~{fragments/forms::inputRow(object='usuario', field='dataDemissao', required=true, inputClass='js-datetimepicker')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='usuario', field='dataAtualizacao', required=true, inputClass='js-datetimepicker')}" />
                 <div th:replace="~{fragments/forms::inputRow(object='usuario', field='status', required=true, type='radio')}" />
-                <div th:replace="~{fragments/forms::inputRow(object='usuario', field='funcoes', type='multiselect')}" />
                 <input type="submit" th:value="#{usuario.edit.headline}" class="btn btn-primary mt-4" />
             </form>
         </div>

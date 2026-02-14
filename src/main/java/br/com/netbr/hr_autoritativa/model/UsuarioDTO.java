@@ -1,9 +1,14 @@
 package br.com.netbr.hr_autoritativa.model;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +17,9 @@ import lombok.Setter;
 @Setter
 public class UsuarioDTO {
 
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private UUID id;
 
     @NotNull
     @Size(max = 255)
@@ -27,18 +34,17 @@ public class UsuarioDTO {
     @Size(max = 50)
     private String funcao;
 
-    @NotNull
-    private LocalDateTime dataAdmissao;
-
-    @NotNull
-    private LocalDateTime dataDemissao;
-
-    @NotNull
-    private LocalDateTime dataAtualizacao;
+//    @NotNull
+//    private LocalDateTime dataAdmissao;
+//
+//    @NotNull
+//    private LocalDateTime dataDemissao;
+//
+//    @NotNull
+//    private LocalDateTime dataAtualizacao;
 
     @NotNull
     private Status status;
 
-    private List<Long> funcoes;
 
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.UUID;
+
 
 @Controller
 @RequestMapping("/usuarios")
@@ -57,13 +59,13 @@ public class UsuarioController {
     }
 
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable(name = "id") final Long id, final Model model) {
+    public String edit(@PathVariable(name = "id") final UUID id, final Model model) {
         model.addAttribute("usuario", usuarioService.get(id));
         return "usuario/edit";
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@PathVariable(name = "id") final Long id,
+    public String edit(@PathVariable(name = "id") final UUID id,
             @ModelAttribute("usuario") @Valid final UsuarioDTO usuarioDTO,
             final BindingResult bindingResult, final RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
@@ -75,7 +77,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/delete/{id}")
-    public String delete(@PathVariable(name = "id") final Long id,
+    public String delete(@PathVariable(name = "id") final UUID id,
             final RedirectAttributes redirectAttributes) {
         usuarioService.delete(id);
         redirectAttributes.addFlashAttribute(WebUtils.MSG_INFO, WebUtils.getMessage("usuario.delete.success"));

@@ -5,6 +5,8 @@ import br.com.netbr.hr_autoritativa.model.UsuarioDTO;
 import br.com.netbr.hr_autoritativa.repos.UsuarioRepository;
 import br.com.netbr.hr_autoritativa.util.NotFoundException;
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -25,26 +27,26 @@ public class UsuarioService {
                 .toList();
     }
 
-    public UsuarioDTO get(final Long id) {
+    public UsuarioDTO get(final UUID id) {
         return usuarioRepository.findById(id)
                 .map(usuario -> mapToDTO(usuario, new UsuarioDTO()))
                 .orElseThrow(NotFoundException::new);
     }
 
-    public Long create(final UsuarioDTO usuarioDTO) {
+    public UUID create(final UsuarioDTO usuarioDTO) {
         final Usuario usuario = new Usuario();
         mapToEntity(usuarioDTO, usuario);
         return usuarioRepository.save(usuario).getId();
     }
 
-    public void update(final Long id, final UsuarioDTO usuarioDTO) {
+    public void update(final UUID id, final UsuarioDTO usuarioDTO) {
         final Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
         mapToEntity(usuarioDTO, usuario);
         usuarioRepository.save(usuario);
     }
 
-    public void delete(final Long id) {
+    public void delete(final UUID id) {
         final Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(NotFoundException::new);
         usuarioRepository.delete(usuario);

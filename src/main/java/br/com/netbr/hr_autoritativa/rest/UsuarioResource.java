@@ -5,6 +5,8 @@ import br.com.netbr.hr_autoritativa.service.UsuarioService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,19 +36,19 @@ public class UsuarioResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> getUsuario(@PathVariable(name = "id") final Long id) {
+    public ResponseEntity<UsuarioDTO> getUsuario(@PathVariable(name = "id") final UUID id) {
         return ResponseEntity.ok(usuarioService.get(id));
     }
 
     @PostMapping
     @ApiResponse(responseCode = "201")
-    public ResponseEntity<Long> createUsuario(@RequestBody @Valid final UsuarioDTO usuarioDTO) {
-        final Long createdId = usuarioService.create(usuarioDTO);
+    public ResponseEntity<UUID> createUsuario(@RequestBody @Valid final UsuarioDTO usuarioDTO) {
+        final UUID createdId = usuarioService.create(usuarioDTO);
         return new ResponseEntity<>(createdId, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Long> updateUsuario(@PathVariable(name = "id") final Long id,
+    public ResponseEntity<UUID> updateUsuario(@PathVariable(name = "id") final UUID id,
             @RequestBody @Valid final UsuarioDTO usuarioDTO) {
         usuarioService.update(id, usuarioDTO);
         return ResponseEntity.ok(id);
@@ -54,7 +56,7 @@ public class UsuarioResource {
 
     @DeleteMapping("/{id}")
     @ApiResponse(responseCode = "204")
-    public ResponseEntity<Void> deleteUsuario(@PathVariable(name = "id") final Long id) {
+    public ResponseEntity<Void> deleteUsuario(@PathVariable(name = "id") final UUID id) {
         usuarioService.delete(id);
         return ResponseEntity.noContent().build();
     }

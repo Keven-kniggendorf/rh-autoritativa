@@ -15,6 +15,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.Map;
+import java.util.UUID;
+
 import org.springframework.web.servlet.HandlerMapping;
 
 
@@ -55,7 +57,7 @@ public @interface UsuarioEmailUnique {
             @SuppressWarnings("unchecked") final Map<String, String> pathVariables =
                     ((Map<String, String>)request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE));
             final String currentId = pathVariables.get("id");
-            if (currentId != null && value.equalsIgnoreCase(usuarioService.get(Long.parseLong(currentId)).getEmail())) {
+            if (currentId != null && usuarioService.get(UUID.fromString(currentId)).getEmail().equalsIgnoreCase(value)) {
                 // value hasn't changed
                 return true;
             }
